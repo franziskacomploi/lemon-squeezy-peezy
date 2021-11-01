@@ -1,0 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import './_globals.scss';
+@import '../css/_fonts.css';
+@import './_auth.scss';

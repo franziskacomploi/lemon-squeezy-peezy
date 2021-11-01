@@ -1,0 +1,25 @@
+* {
+  margin: 0;
+  padding: 0;
+  @apply font-sans text-base;
+}
+
+h1 {
+  @apply font-serif text-3xl;
+}
+
+h2 {
+  @apply font-serif text-2xl;
+}
+
+h3 {
+  @apply font-serif text-xl;
+}
+
+p {
+  @apply font-sans text-lg;
+}
+
+.brandButton {
+  @apply px-4 py-2 bg-mistyRose text-offWhite font-bold text-lg tracking-wide rounded-full shadow;
+}
