@@ -17,6 +17,9 @@ const Navbar = () => {
             </span>
           </h1>
         </NavLink>
+        <NavLink className="brandButton" to="/companies">
+          Companies
+        </NavLink>
         <div className="flex flex-row justify-center items-center gap-3">
           {!currentUser && (
             <>
@@ -30,15 +33,6 @@ const Navbar = () => {
           )}
           {currentUser && (
             <>
-              <NavLink className="brandButton" to="/companies">
-                See Companies
-              </NavLink>
-              <NavLink className="brandButton" to="/account">
-                Account
-              </NavLink>
-              <NavLink className="brandButton" to="/dashboard">
-                Dashboard
-              </NavLink>
               <Logout />
             </>
           )}

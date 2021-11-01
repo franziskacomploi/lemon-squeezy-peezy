@@ -1,12 +1,12 @@
 import React from 'react';
 import {BrowserRouter, Switch, Route} from 'react-router-dom';
-import Main from '../../pages/Main';
-import PageNotFound from '../../pages/PageNotFound';
-import Dashboard from '../pages/Dashboard';
-import SignupPage from '../pages/SignupPage';
+import Main from '../pages/Main';
+import PageNotFound from '../pages/PageNotFound';
+import SignupPage from '../pages/SignUpPage';
 import LoginPage from '../pages/LoginPage';
-import Account from '../pages/Account';
+import Dashboard from '../pages/Dashboard';
 import Companies from '../pages/Companies';
+import BuyShare from '../pages/BuyShare';
 
 const Router = () => {
   return (
@@ -24,11 +24,11 @@ const Router = () => {
         <Route path="/dashboard">
           <Dashboard />
         </Route>
-        <Route path="/account">
-          <Account />
-        </Route>
         <Route path="/companies">
           <Companies />
+        </Route>
+        <Route path="/buyshare">
+          <BuyShare />
         </Route>
         <Route>
           <PageNotFound />

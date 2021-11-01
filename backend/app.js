@@ -16,10 +16,10 @@ app.use(express.urlencoded({extendednpm: true}));
 app.use(logger('dev'));
 app.use(cors());
 app.use(bodyParser.json());
-require('./session/session.config')(app);
+require('./configs/session.config')(app);
 
 app.use('/api', require('./routes/index'));
-app.use('/api', require('./routes/users'));
+app.use('/api', require('./routes/auth'));
 app.use('/api', require('./routes/companies'));
 
 app.listen(process.env.PORT, () => {

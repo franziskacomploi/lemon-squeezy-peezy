@@ -1,9 +1,10 @@
 import React, {useState} from 'react';
 import AuthContext from './context/AuthContext';
-import Router from './routes/routes';
+import Router from './routes/Router';
 
 export const App = () => {
   const [currentUser, setCurrentUser] = useState();
+  const [buy, setBuy] = useState();
 
   return (
     <>
@@ -11,6 +12,8 @@ export const App = () => {
         value={{
           currentUser,
           setCurrentUser,
+          buy,
+          setBuy,
         }}
       >
         <Router />
