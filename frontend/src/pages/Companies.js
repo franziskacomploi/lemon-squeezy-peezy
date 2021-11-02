@@ -28,13 +28,13 @@ const Companies = () => {
             return (
               <div
                 key={company._id}
-                className="flex flex-col border rounded-xl m-4 w-48"
+                className="flex flex-col border rounded-xl shadow m-4 w-48 text-center"
               >
                 <h2 className="bg-linen p-2 rounded-t-xl">{company.name}</h2>
-                <div className="px-2">({company.founded_in})</div>
+                <div className="mt-6 mb-2">({company.founded_in})</div>
                 <button
                   type="button"
-                  className="self-center brandButton p-2 mt-4 mb-2"
+                  className="self-center smallButton p-2 my-4"
                   onClick={() => {
                     setIsOpenCompany(company);
                   }}
@@ -48,7 +48,7 @@ const Companies = () => {
       {isOpenCompany && (
         <>
           <LemonDivider className="mx-auto" />
-          <div className="mx-auto mx-2 my-12">
+          <div className="text-center mx-2 my-12">
             <h1 className="underline">{isOpenCompany.name}</h1>
             <div>{isOpenCompany.description}</div>
             <div className="mb-10">
@@ -59,7 +59,7 @@ const Companies = () => {
                 setBuy(isOpenCompany);
                 history.push('/buyshare');
               }}
-              className="brandButton p-2"
+              className="smallButton p-2"
             >
               Buy Shares
             </button>

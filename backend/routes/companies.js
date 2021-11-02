@@ -3,6 +3,8 @@ const router = express.Router();
 
 const Company = require('../models/Company.model');
 
+const Share = require('../models/Share.model');
+
 router.get('/companies', (req, res) => {
   Company.find().then((companiesFound) => {
     res.send({companies: companiesFound});
@@ -18,7 +20,7 @@ router.get('/companies/:id', (req, res) => {
 
 router.get('/shares/:id', (req, res) => {
   const id = req.params.id;
-  Shares.find({from_company: id})
+  Share.find({from_company: id})
     .populate('company')
     .then((sharesFound) => {
       res.send({shares: sharesFound});

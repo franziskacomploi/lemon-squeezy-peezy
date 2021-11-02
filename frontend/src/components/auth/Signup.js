@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useContext} from 'react';
-import {useHistory} from 'react-router';
+import {useHistory} from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import axios from 'axios';
 const backendURL = process.env.REACT_APP_BACKENDURL;
@@ -52,11 +52,7 @@ const SignUp = () => {
           Error while trying to sign up. {error}
         </div>
       )}
-      <form
-        onSubmit={handleSubmit}
-        className="flex flex-col mt-10 mx-auto"
-        enctype="multipart/form-data"
-      >
+      <form onSubmit={handleSubmit} className="flex flex-col mt-10 mx-auto">
         <label className="authLabel">Email*</label>
         <input
           className="authInput"

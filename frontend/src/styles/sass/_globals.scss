@@ -23,3 +23,7 @@ p {
 .brandButton {
   @apply px-4 py-2 bg-mistyRose text-offWhite font-bold text-lg tracking-wide rounded-full shadow;
 }
+
+.smallButton {
+  @apply px-4 py-2 bg-alabaster font-bold text-lg tracking-wide rounded-full shadow;
+}
