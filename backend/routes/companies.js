@@ -16,4 +16,13 @@ router.get('/companies/:id', (req, res) => {
   });
 });
 
+router.get('/shares/:id', (req, res) => {
+  const id = req.params.id;
+  Shares.find({from_company: id})
+    .populate('company')
+    .then((sharesFound) => {
+      res.send({shares: sharesFound});
+    });
+});
+
 module.exports = router;

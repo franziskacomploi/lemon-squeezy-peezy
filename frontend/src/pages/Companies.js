@@ -56,7 +56,7 @@ const Companies = () => {
             </div>
             <button
               onClick={() => {
-                setBuy(isOpenCompany.name);
+                setBuy(isOpenCompany);
                 history.push('/buyshare');
               }}
               className="brandButton p-2"

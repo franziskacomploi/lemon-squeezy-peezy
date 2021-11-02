@@ -23,12 +23,16 @@ const SignUp = () => {
       return setError('Passwords do not match.');
     }
 
+    const uploadData = new FormData();
+    uploadData.append('profileImg', isImg);
+    setIsImg(uploadData);
+
     axios
       .post(`${backendURL}/api/signup`, {
         email: isEmail,
         name: isName,
         password: isPassword,
-        profileImg: isImg,
+        profileImg: uploadData,
         description: isDescription,
       })
       .then((user) => {
@@ -48,7 +52,11 @@ const SignUp = () => {
           Error while trying to sign up. {error}
         </div>
       )}
-      <form onSubmit={handleSubmit} className="flex flex-col mt-10 mx-auto">
+      <form
+        onSubmit={handleSubmit}
+        className="flex flex-col mt-10 mx-auto"
+        enctype="multipart/form-data"
+      >
         <label className="authLabel">Email*</label>
         <input
           className="authInput"
@@ -89,9 +97,7 @@ const SignUp = () => {
         <input
           className="authInput"
           onChange={(e) => {
-            const uploadData = new FormData();
-            uploadData.append('profileImg', e.target.files[0]);
-            setIsImg(uploadData);
+            setIsImg(e.target.files[0]);
           }}
           type="file"
         />
