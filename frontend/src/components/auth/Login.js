@@ -39,11 +39,7 @@ const Login = () => {
 
   return (
     <>
-      {error && (
-        <div className="p-2 bg-melon text-white">
-          Error while trying to login. {error}
-        </div>
-      )}
+      {error && <div className="p-2 bg-melon text-white">{error}</div>}
       <form onSubmit={handleSubmit} className="flex flex-col my-10 mx-auto">
         <label className="authLabel">Email</label>
         <input
