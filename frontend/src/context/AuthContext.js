@@ -5,6 +5,8 @@ const AuthContext = React.createContext({
   setCurrentUser: () => {},
   buy: '',
   setBuy: () => {},
+  currentShare: '',
+  setCurrentShare: () => {},
 });
 
 export default AuthContext;

@@ -1,0 +1,21 @@
+{
+  "name": "lemon-squeezy-peezy",
+  "version": "1.0.0",
+  "description": "Ironhack Project 3 - Lemon Squeezy 🍋",
+  "main": "index.js",
+  "scripts": {
+    "start": "cd backend && npm run start",
+    "build": "cd frontend && npm install && npm run build",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/franziskapendzialek/lemon-squeezy-peezy.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/franziskapendzialek/lemon-squeezy-peezy/issues"
+  },
+  "homepage": "https://github.com/franziskapendzialek/lemon-squeezy-peezy#readme"
+}

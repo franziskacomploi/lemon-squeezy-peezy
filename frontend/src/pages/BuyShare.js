@@ -1,43 +1,47 @@
 import React, {useContext, useEffect, useState} from 'react';
 import AuthContext from '../context/AuthContext';
+import {useHistory} from 'react-router';
 import Layout from '../components/layout/Layout';
 import axios from 'axios';
-import {useHistory} from 'react-router-dom';
 import {Link} from 'react-router-dom';
 import LemonDivider from '../components/main/LemonDivider';
 const backendURL = process.env.REACT_APP_BACKENDURL;
 
 const BuyShare = () => {
-  const {buy} = useContext(AuthContext);
-  const [shares, setShares] = useState(null);
-  const history = useHistory();
+  const {buy, setCurrentShare} = useContext(AuthContext);
+  const [shares, setShares] = useState();
 
-  const handleBuy = () => {
-    history.push('/');
-  };
+  const history = useHistory();
 
   useEffect(() => {
     if (buy) {
       axios.get(`${backendURL}/api/shares/${buy._id}`).then((data) => {
         setShares(data.data.shares);
       });
-    } else {
-      return (
-        <div>
-          <h3>Please choose a company.</h3>
-          <Link to="/companies">See companies</Link>
-        </div>
-      );
     }
   }, [buy]);
 
+  const handleBuyStart = (id) => {
+    setCurrentShare(id);
+    history.push('/buyshareone');
+  };
+
   return (
     <Layout>
-      <h1 className="text-center mt-4">
-        Buy your share from {buy ? buy.name : 'your favorite company'} here:
-      </h1>
-      <div className="my-12">
-        {shares ? (
+      <div className="flex flex-col justfiy-center items-center">
+        <h1 className="text-center">
+          Buy your share from {buy ? buy.name : 'your favorite company'} here:
+        </h1>
+
+        {!shares && (
+          <div className="flex flex-col items-center">
+            <h3 className="mb-6">Please choose a company.</h3>
+            <Link className="smallButton" to="/companies">
+              See companies
+            </Link>
+          </div>
+        )}
+        {shares &&
           shares.map((share) => {
             return (
               <div
@@ -51,7 +55,9 @@ const BuyShare = () => {
                   <button
                     type="button"
                     className="smallButton my-4"
-                    onClick={handleBuy}
+                    onClick={() => {
+                      handleBuyStart(share._id);
+                    }}
                   >
                     Buy Share
                   </button>
@@ -59,15 +65,7 @@ const BuyShare = () => {
                 {share !== shares[shares.length - 1] && <LemonDivider />}
               </div>
             );
-          })
-        ) : (
-          <>
-            <h3 className="mb-6">Please choose a company.</h3>
-            <Link className="smallButton" to="/companies">
-              See companies
-            </Link>
-          </>
-        )}
+          })}
       </div>
     </Layout>
   );

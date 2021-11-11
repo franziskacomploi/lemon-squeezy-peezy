@@ -4,10 +4,10 @@ import Navbar from './navigation/Navbar';
 
 const Layout = ({children}) => {
   return (
-    <div className="flex flex-col h-screen w-screen">
+    <div className="flex flex-col justify-between h-screen w-screen">
       <Navbar />
       {children}
-      <Footer />
+      <Footer className="h-10" />
     </div>
   );
 };

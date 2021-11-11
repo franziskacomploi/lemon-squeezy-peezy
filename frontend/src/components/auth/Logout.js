@@ -2,16 +2,18 @@ import React, {useContext} from 'react';
 import {useHistory} from 'react-router';
 import AuthContext from '../../context/AuthContext';
 import axios from 'axios';
+const backendURL = process.env.REACT_APP_BACKENDURL;
 
 const Logout = () => {
   const history = useHistory();
-  const {setCurrentUser} = useContext(AuthContext);
+  const {setCurrentUser, setBuy} = useContext(AuthContext);
 
   const handleLogout = () => {
     axios
-      .post('/api/logout')
+      .post(`${backendURL}/api/logout`)
       .then(() => {
         setCurrentUser();
+        setBuy();
         history.push('/');
       })
       .catch((error) => {

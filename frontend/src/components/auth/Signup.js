@@ -52,7 +52,7 @@ const SignUp = () => {
           Error while trying to sign up. {error}
         </div>
       )}
-      <form onSubmit={handleSubmit} className="flex flex-col mt-10 mx-auto">
+      <form onSubmit={handleSubmit} className="flex flex-col mx-auto">
         <label className="authLabel">Email*</label>
         <input
           className="authInput"

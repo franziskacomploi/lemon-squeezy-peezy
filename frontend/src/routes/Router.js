@@ -7,6 +7,7 @@ import LoginPage from '../pages/LoginPage';
 import Dashboard from '../pages/Dashboard';
 import Companies from '../pages/Companies';
 import BuyShare from '../pages/BuyShare';
+import BuyShareOne from '../pages/BuyShareOne';
 
 const Router = () => {
   return (
@@ -26,6 +27,9 @@ const Router = () => {
         </Route>
         <Route path="/companies">
           <Companies />
+        </Route>
+        <Route path="/buyshareone">
+          <BuyShareOne />
         </Route>
         <Route path="/buyshare">
           <BuyShare />

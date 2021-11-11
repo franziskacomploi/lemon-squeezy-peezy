@@ -40,7 +40,7 @@ const Login = () => {
   return (
     <>
       {error && <div className="p-2 bg-melon text-white">{error}</div>}
-      <form onSubmit={handleSubmit} className="flex flex-col my-10 mx-auto">
+      <form onSubmit={handleSubmit} className="flex flex-col mx-auto">
         <label className="authLabel">Email</label>
         <input
           className="authInput"

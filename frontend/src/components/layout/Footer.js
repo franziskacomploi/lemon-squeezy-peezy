@@ -5,8 +5,8 @@ export const Footer = ({className}) => {
   return (
     <div className={`${className} w-full py-2 bg-linen text-center`}>
       <span className="bg-linen">
-        Made with{' '}
-        <span role="img" aria-label="heart">
+        Made with
+        <span role="img" aria-label="heart" className="px-2">
           ❤️
         </span>{' '}
         in Berlin.

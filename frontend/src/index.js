@@ -2,10 +2,19 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import App from './App';
 import './styles/sass/App.scss';
+import axios from 'axios';
+const backendURL = process.env.REACT_APP_BACKENDURL;
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+axios
+  .get(`${backendURL}/api/checkuser`)
+  .then((res) => {
+    ReactDOM.render(
+      <React.StrictMode>
+        <App currentUserInSession={res.data.currentUser} />
+      </React.StrictMode>,
+      document.getElementById('root')
+    );
+  })
+  .catch((err) => {
+    alert('Backend not running or /checkuser route not defined!');
+  });
