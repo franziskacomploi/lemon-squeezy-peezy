@@ -3,7 +3,7 @@ import Layout from '../components/layout/Layout';
 import Hero from '../components/main/Hero';
 import HowToSection from '../components/main/HowToSection';
 import BrandButton from '../components/common/BrandButton';
-import {useHistory} from 'react-router';
+import {useHistory} from 'react-router-dom';
 import AuthContext from '../context/AuthContext';
 
 const Main = () => {

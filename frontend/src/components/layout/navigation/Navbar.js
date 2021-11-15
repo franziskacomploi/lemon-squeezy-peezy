@@ -36,6 +36,9 @@ const Navbar = () => {
               <NavLink className="brandButton" to="/buyshare">
                 Buy a share
               </NavLink>
+              <NavLink className="brandButton" to="/dashboard">
+                Dashboard
+              </NavLink>
               <Logout />
             </>
           )}

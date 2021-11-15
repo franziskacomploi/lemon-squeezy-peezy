@@ -2,7 +2,6 @@ const express = require('express');
 const router = express.Router();
 
 const Company = require('../models/Company.model');
-
 const Share = require('../models/Share.model');
 
 router.get('/companies', (req, res) => {
@@ -18,12 +17,13 @@ router.get('/companies/:id', (req, res) => {
   });
 });
 
-router.get('/shares/:id', (req, res) => {
+router.get('/shares/:id', (req, res, next) => {
   const id = req.params.id;
-  Share.find({from_company: id})
-    .populate('company')
+  Share.find({company: id})
+    .populate({path: 'company', model: Company})
     .then((sharesFound) => {
       res.send({shares: sharesFound});
+      next();
     });
 });
 

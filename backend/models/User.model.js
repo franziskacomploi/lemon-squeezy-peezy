@@ -15,7 +15,6 @@ const userSchema = new Schema(
     name: String,
     profileImg: Object,
     description: String,
-    shares: {type: Schema.Types.ObjectId, ref: 'User'},
   },
   {
     timestamp: {

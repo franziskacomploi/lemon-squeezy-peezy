@@ -3,7 +3,7 @@ const {Schema, model} = mongoose;
 
 const shareSchema = new Schema({
   name: String,
-  from_company: {type: Schema.Types.ObjectId, ref: 'Company'},
+  company: {type: Schema.Types.ObjectId, ref: 'Company'},
   price: Number,
   issued_on: Date,
   amount: Number,

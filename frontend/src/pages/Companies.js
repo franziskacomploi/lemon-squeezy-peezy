@@ -1,5 +1,5 @@
 import React, {useState, useEffect, useContext} from 'react';
-import {useHistory} from 'react-router';
+import {useHistory} from 'react-router-dom';
 import axios from 'axios';
 import Layout from '../components/layout/Layout';
 import LemonDivider from '../components/main/LemonDivider';
@@ -47,7 +47,7 @@ const Companies = () => {
       </div>
       {isOpenCompany && (
         <>
-          <LemonDivider className="mx-auto" />
+          <LemonDivider />
           <div className="text-center mx-2 my-12">
             <h1 className="underline">{isOpenCompany.name}</h1>
             <div>{isOpenCompany.description}</div>

@@ -4,8 +4,8 @@
   "description": "Ironhack Project 3 - Lemon Squeezy 🍋",
   "main": "index.js",
   "scripts": {
-    "start": "cd backend && npm run start",
-    "build": "cd frontend && npm install && npm run build",
+    "start": "cd backend/ && npm run start",
+    "build": "cd frontend/ && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

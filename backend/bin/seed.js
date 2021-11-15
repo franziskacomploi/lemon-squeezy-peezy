@@ -26,21 +26,21 @@ const shares = [
     name: '0815 Share',
     price: 58,
     issued_on: new Date(2006),
-    from_company: '',
+    company: '',
     amount: 300,
   },
   {
     name: 'The better choice',
     price: 63,
     issued_on: new Date(2012),
-    from_company: '',
+    company: '',
     amount: 200,
   },
   {
     name: "You're a techie",
     price: 89,
     issued_on: new Date(2008),
-    from_company: '',
+    company: '',
     amount: 600,
   },
 ];
@@ -63,9 +63,9 @@ connectDB()
       let company1 = companies[0]._id;
       let company2 = companies[1]._id;
 
-      shares[0].from_company = company1;
-      shares[1].from_company = company1;
-      shares[2].from_company = company2;
+      shares[0].company = company1;
+      shares[1].company = company1;
+      shares[2].company = company2;
 
       Share.create(shares).then((shares) => {
         console.log(`Created ${shares.length} Shares.`);
