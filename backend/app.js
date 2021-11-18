@@ -19,7 +19,7 @@ app.use(bodyParser.json());
 require('./configs/session.config')(app);
 
 app.use(express.static('../frontend/build/static'));
-app.use(favicon('../frontend/public/favicon.ico'));
+// app.use(favicon('../frontend/public/favicon.ico'));
 
 app.use('/api', require('./routes/index'));
 app.use('/api', require('./routes/auth'));
