@@ -18,7 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 require('./configs/session.config')(app);
 
-app.use(express.static('./../frontend/build/static'));
+app.use(express.static('./../frontend/build'));
 app.use(favicon('./../frontend/public/favicon.ico'));
 
 app.use('/api', require('./routes/index'));
@@ -28,7 +28,7 @@ app.use('/api', require('./routes/user'));
 
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
-  res.sendFile('./../frontend/public/index.html');
+  res.sendFile('./../frontend/build/index.html');
 });
 
 app.listen(process.env.PORT, () => {
