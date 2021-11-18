@@ -20,6 +20,19 @@ app.use(cors());
 app.use(bodyParser.json());
 require('./configs/session.config')(app);
 
+const MongoStore = require('connect-mongo');
+app.use(
+  session({
+    secret: process.env.SESS_SECRET,
+
+    resave: false,
+    saveUninitialized: true, // create cookie for non-logged-in user
+
+    // MongoStore makes sure the user stays logged in also when the server restarts
+    store: MongoStore.create({mongoUrl: process.env.MONGODB_URI}),
+  })
+);
+
 app.use(express.static(path.join(__dirname + '/frontend/build')));
 app.use(express.static(path.join(__dirname, 'public')));
 // app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
