@@ -7,6 +7,7 @@ const cookieParser = require('cookie-parser');
 const logger = require('morgan');
 const cors = require('cors');
 const path = require('path');
+const favicon = require('serve-favicon');
 app.use(cookieParser());
 
 // Calling the Database
