@@ -18,10 +18,19 @@ app.use(cors());
 app.use(bodyParser.json());
 require('./configs/session.config')(app);
 
+app.use(express.static('../frontend/build'));
+app.use(express.static('../frontend/public'));
+app.use(favicon('../frontend/public/favicon.ico'));
+
 app.use('/api', require('./routes/index'));
 app.use('/api', require('./routes/auth'));
 app.use('/api', require('./routes/companies'));
 app.use('/api', require('./routes/user'));
+
+app.use((req, res, next) => {
+  // If no routes match, send them the React HTML.
+  res.sendFile('../frontend/build/index.html');
+});
 
 app.listen(process.env.PORT, () => {
   console.log('It works woohooo!');
