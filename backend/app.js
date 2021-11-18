@@ -28,7 +28,7 @@ app.use('/api', require('./routes/user'));
 
 app.use((req, res, next) => {
   // If no routes match, send them the React HTML.
-  res.sendFile('../frontend/build/static/index.html');
+  res.sendFile('./../frontend/public/index.html');
 });
 
 app.listen(process.env.PORT, () => {
