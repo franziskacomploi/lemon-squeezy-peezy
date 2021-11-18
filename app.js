@@ -19,6 +19,7 @@ app.use(bodyParser.json());
 require('./configs/session.config')(app);
 
 app.use(express.static(path.join(__dirname + '/frontend/build')));
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(favicon(path.join(__dirname, 'public', 'images', 'favicon.ico')));
 
 app.use('/api', require('./routes/index'));
