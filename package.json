@@ -4,11 +4,11 @@
   "description": "Ironhack Project 3 - Lemon Squeezy 🍋",
   "main": "index.js",
   "scripts": {
-    "start": "cd backend/ && npm run startBackend",
+    "start": "npm run startBackend",
     "build": "npm install && cd frontend/ && npm install && npm install --only=dev && npm run build ",
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon app.js",
-    "startBackend": "node backend/app.js"
+    "startBackend": "cd backend/ && node app.js"
   },
   "dependencies": {
     "bcryptjs": "^2.4.3",
