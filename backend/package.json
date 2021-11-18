@@ -4,7 +4,8 @@
   "description": "Ironhack Project 3",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "node app.js",
+    "dev": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -25,7 +26,9 @@
     "mongoose": "^5.13.5",
     "morgan": "^1.10.0",
     "multer": "^1.4.3",
-    "multer-storage-cloudinary": "^4.0.0",
+    "multer-storage-cloudinary": "^4.0.0"
+  },
+  "devDependencies": {
     "nodemon": "^2.0.12"
   },
   "author": "",
