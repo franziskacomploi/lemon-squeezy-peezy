@@ -30,7 +30,7 @@ app.use(
     saveUninitialized: true, // create cookie for non-logged-in user
 
     // MongoStore makes sure the user stays logged in also when the server restarts
-    store: MongoStore.create({mongoUrl: process.env.MONGODB_URI}),
+    store: MongoStore.create({mongoUrl: process.env.MONGOURI}),
   })
 );
 
