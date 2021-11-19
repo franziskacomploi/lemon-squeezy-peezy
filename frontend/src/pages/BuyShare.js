@@ -82,7 +82,7 @@ const BuyShare = () => {
                   >
                     <div className="border rounded-xl shadow my-2 mx-8 px-2 py-4 w-48 text-center">
                       <h2>{share.name}</h2>
-                      <div>Price: {share.price}</div>
+                      <div>Price: {share.price}€</div>
                       <div>Available amount: {share.amount}</div>
                       <button
                         type="button"

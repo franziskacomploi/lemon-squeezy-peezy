@@ -40,10 +40,12 @@ const Dashboard = () => {
   const handleSellSubmit = (e) => {
     e.preventDefault();
 
-    const restAmount = currentShare.boughtAmount - amountOfShares;
-    const soldAmount = currentShare.originalShare.amount + amountOfShares;
+    let restAmount = currentShare.boughtAmount - parseInt(amountOfShares);
+    let soldAmount =
+      currentShare.originalShare.amount + parseInt(amountOfShares);
 
-    console.log('soldAmount', soldAmount);
+    console.log('soldAmount', typeof soldAmount);
+    console.log('restAmount', typeof restAmount);
 
     axios
       .post(`${backendURL}/api/sellshare/${currentShare._id}`, {
@@ -70,7 +72,7 @@ const Dashboard = () => {
         <LemonDivider />
         <div className="flex flex-col items-center justify-center">
           <h3>Personal Details</h3>
-          {currentUser.profileImg && (
+          {currentUser && currentUser.profileImg && (
             <div className="my-6 w-28 h-28 bg-alabaster rounded-full shadow">
               <img
                 src={currentUser.profileImg}
@@ -106,7 +108,7 @@ const Dashboard = () => {
                     </div>
                     <div className="flex flex-row items-center gap-3">
                       <div className="smallLabel mt-2">Value:</div>
-                      <div className="smallDetails">{share.value}</div>
+                      <div className="smallDetails">{share.value}€</div>
                     </div>
                     <div className="flex flex-row items-center gap-3">
                       <div className="smallLabel mt-2">Amount:</div>
