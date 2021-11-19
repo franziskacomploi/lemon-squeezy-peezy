@@ -15,6 +15,9 @@ const Dashboard = () => {
   const [amountOfShares, setAmountOfShares] = useState();
   const [refreshKey, setRefreshKey] = useState(0);
 
+  const [allValue, setAllValue] = useState(0);
+  const [allShares, setAllShares] = useState(0);
+
   useEffect(() => {
     if (currentUser) {
       async function fetchData() {
@@ -25,8 +28,21 @@ const Dashboard = () => {
           });
       }
       fetchData();
+
+      const mapPortfolio = () => {
+        let sumValue = 0;
+        let sumShares = 0;
+        shares.map((share) => {
+          sumValue += share.value;
+          sumShares += share.boughtAmount;
+        });
+        setAllValue(sumValue);
+        setAllShares(sumShares);
+      };
+
+      mapPortfolio();
     }
-  }, [currentUser, refreshKey]);
+  }, [currentUser, refreshKey, shares]);
 
   const handleSell = (share) => {
     setCurrentShare(share);
@@ -81,7 +97,7 @@ const Dashboard = () => {
               />
             </div>
           )}
-          <div className="flex flex-row items-center gap-1 mt-2">
+          <div className="flex flex-row items-center gap-1">
             <div className="smallLabel w-20">Name:</div>
             <div className="smallDetails">
               {currentUser && currentUser.name}
@@ -97,25 +113,31 @@ const Dashboard = () => {
         {shares && shares.length > 0 && (
           <div className="my-8">
             <LemonDivider />
+            <h3 className="mb-4">Your Portfolio Overview</h3>
+            <div className="font-bold">Your Portfolio Value:</div>
+            <div>{allValue}€</div>
+            <div className="font-bold">Your Amount of Shares:</div>
+            <div>{allShares} Shares</div>
+            <LemonDivider />
             <h3 className="mb-4">Your shares</h3>
             <div className="flex flex-row justify-center items-center gap-3">
               {shares.map((share) => {
                 return (
                   <div key={share._id} className="shadow p-2 rounded-lg">
-                    <div className="flex flex-row items-center gap-3">
-                      <div className="smallLabel mt-2">Name:</div>
+                    <div className="labelContainer">
+                      <div className="smallLabel">Name:</div>
                       <div className="smallDetails">{share.name}</div>
                     </div>
-                    <div className="flex flex-row items-center gap-3">
-                      <div className="smallLabel mt-2">Value:</div>
+                    <div className="labelContainer">
+                      <div className="smallLabel">Value:</div>
                       <div className="smallDetails">{share.value}€</div>
                     </div>
-                    <div className="flex flex-row items-center gap-3">
-                      <div className="smallLabel mt-2">Amount:</div>
+                    <div className="labelContainer">
+                      <div className="smallLabel">Amount:</div>
                       <div className="smallDetails">{share.boughtAmount}</div>
                     </div>
-                    <div className="flex flex-row items-center gap-3">
-                      <div className="smallLabel mt-2">Company:</div>
+                    <div className="labelContainer">
+                      <div className="smallLabel">Company:</div>
                       <div className="smallDetails"> {share.company.name}</div>
                     </div>
                     <button
@@ -125,7 +147,7 @@ const Dashboard = () => {
                         handleSell(share);
                       }}
                     >
-                      Sell Shares
+                      Sell
                     </button>
                   </div>
                 );

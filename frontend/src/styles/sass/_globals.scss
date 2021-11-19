@@ -39,3 +39,7 @@ p {
 .modalHeading {
   @apply px-4 py-1 font-bold text-base;
 }
+
+.labelContainer {
+  @apply flex flex-row items-center gap-1 mt-2;
+}
