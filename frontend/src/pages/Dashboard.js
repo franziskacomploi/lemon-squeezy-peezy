@@ -1,13 +1,13 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Layout from '../components/layout/Layout';
 import AuthContext from '../context/AuthContext';
 import axios from 'axios';
-import {Modal} from '../components/common/Modal';
+import { Modal } from '../components/common/Modal';
 import LemonDivider from '../components/main/LemonDivider';
 const backendURL = process.env.REACT_APP_BACKENDURL;
 
 const Dashboard = () => {
-  const {currentUser} = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const [shares, setShares] = useState();
   const [showModal, setShowModal] = useState(false);
   const [currentShare, setCurrentShare] = useState();
@@ -17,7 +17,7 @@ const Dashboard = () => {
   useEffect(() => {
     if (currentUser) {
       axios
-        .get(`${backendURL}/api/dashboard/${currentUser.data.email}`)
+        .get(`${backendURL}/api/dashboard/${currentUser.email}`)
         .then((data) => {
           setShares(data.data.shares);
         });
@@ -42,7 +42,7 @@ const Dashboard = () => {
         name: currentShare.name,
         company: currentShare.company,
         price: currentShare.originalShare.price * restAmount,
-        user: currentUser.data.email,
+        user: currentUser.email,
         restAmount: restAmount,
         soldAmount: currentShare.originalShare.amount + amountOfShares,
       })
@@ -61,8 +61,8 @@ const Dashboard = () => {
         <h2 className="my-6">Lemon Dashboard 🍋</h2>
         <LemonDivider />
         <h3>Personal Details</h3>
-        <div>Email: {currentUser && currentUser.data.email}</div>
-        <div>About: {currentUser && currentUser.data.description}</div>
+        <div>Email: {currentUser && currentUser.email}</div>
+        <div>About: {currentUser && currentUser.description}</div>
         {shares && shares.length > 0 && (
           <div className="my-8">
             <LemonDivider />
