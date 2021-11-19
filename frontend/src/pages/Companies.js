@@ -37,7 +37,7 @@ const Companies = () => {
             return (
               <div
                 key={company._id}
-                className="flex flex-col m-4 w-48 text-center"
+                className="flex flex-col m-4 w-52 text-center"
               >
                 <div className="my-6 w-32 h-32 bg-alabaster rounded-full shadow mx-auto">
                   <img
@@ -46,7 +46,16 @@ const Companies = () => {
                     className="w-28 h-28 rounded-full shadow object-cover mx-auto"
                   />
                 </div>
-                <h2 className="bg-linen p-2 rounded-xl mt-4">{company.name}</h2>
+                <div className="mt-4 relative">
+                  <img
+                    src="https://res.cloudinary.com/dq66nu4hm/image/upload/v1637357856/lemon-squeezy/Brush_Stroke-1_xi5uot.png"
+                    alt="underline"
+                    className="absolute bottom-0 -left-6 z-0 h-6 w-52"
+                  />
+                  <h2 className="absolute -bottom-1 z-2 text-offWhite">
+                    {company.name}
+                  </h2>
+                </div>
                 <div className="flex flex-row mx-2 mt-2 gap-2 items-center">
                   {createRating(company).map(() => {
                     return (
