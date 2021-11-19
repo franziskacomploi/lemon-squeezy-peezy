@@ -39,8 +39,9 @@ const Dashboard = () => {
         setAllValue(sumValue);
         setAllShares(sumShares);
       };
-
-      mapPortfolio();
+      if (shares) {
+        mapPortfolio();
+      }
     }
   }, [currentUser, refreshKey, shares]);
 
