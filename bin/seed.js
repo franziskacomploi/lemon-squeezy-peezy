@@ -19,6 +19,13 @@ const companies = [
     description: 'Tech will help revolutionize our world.',
     sustainability_rating: 3,
   },
+  {
+    name: 'IronTech',
+    founded_in: new Date(2011),
+    logo: String,
+    description: 'Everything Iron.',
+    sustainability_rating: 5,
+  },
 ];
 
 const shares = [
@@ -43,6 +50,20 @@ const shares = [
     company: '',
     amount: 600,
   },
+  {
+    name: "You're a techie",
+    price: 29,
+    issued_on: new Date(2008),
+    company: '',
+    amount: 200,
+  },
+  {
+    name: '0815 Share',
+    price: 58,
+    issued_on: new Date(2006),
+    company: '',
+    amount: 100,
+  },
 ];
 
 connectDB()
@@ -62,10 +83,13 @@ connectDB()
 
       let company1 = companies[0]._id;
       let company2 = companies[1]._id;
+      let company3 = companies[2]._id;
 
       shares[0].company = company1;
       shares[1].company = company1;
       shares[2].company = company2;
+      shares[3].company = company3;
+      shares[4].company = company3;
 
       Share.create(shares).then((shares) => {
         console.log(`Created ${shares.length} Shares.`);
