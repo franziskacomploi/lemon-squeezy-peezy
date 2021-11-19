@@ -88,8 +88,10 @@ const BuyShare = () => {
                   >
                     <div className="border rounded-xl shadow my-2 mx-8 px-2 py-4 w-48 text-center">
                       <h2>{share.name}</h2>
-                      <div>Price: {share.price}€</div>
-                      <div>Available amount: {share.amount}</div>
+                      <div className="font-bold">Price:</div>
+                      <div>{share.price}€</div>
+                      <div className="font-bold">Available amount:</div>
+                      <div>{share.amount}</div>
                       <button
                         type="button"
                         className="smallButton my-4"
@@ -98,7 +100,7 @@ const BuyShare = () => {
                           handleBuyStart(share);
                         }}
                       >
-                        Buy Share
+                        Buy
                       </button>
                     </div>
                     {share !== shares[shares.length - 1] && <LemonDivider />}
@@ -112,18 +114,24 @@ const BuyShare = () => {
             <button type="button" className="mx-auto" onClick={handleExitClick}>
               <img src={ExitIcon} alt="Exit-Icon" className="w-4" />
             </button>
-            <h1 className="text-center">You are buying {currentShare.name}</h1>
+            <h1 className="text-center">
+              You are buying{' '}
+              <span className="font-serif text-3xl underline">
+                {currentShare.name}
+              </span>
+            </h1>
+
             <LemonDivider />
             <form
               onSubmit={handleBuySubmit}
               className="flex flex-col items-center gap-2"
             >
               <label className="authLabel">
-                How many share would you like to buy?
+                How many shares would you like to buy?
               </label>
-              <div className="flex flex-row items-center gap-2">
+              <div className="flex flex-row items-center gap-2 my-4">
                 <input
-                  className="authInput"
+                  className="py-2 px-8 border-2 border-sageGreen rounded-full bg-offWhite"
                   type="number"
                   onChange={(e) => {
                     if (e.target.value > currentShare.amount) {
@@ -149,7 +157,7 @@ const BuyShare = () => {
                     }
                   }}
                 />
-                <button type="submit" className="smallButton my-4">
+                <button type="submit" className="smallButton">
                   Buy Now
                 </button>
               </div>
@@ -158,9 +166,12 @@ const BuyShare = () => {
         )}
         {error && (
           <>
-            <div>
-              There are only {currentShare.amount} Shares available. Please
-              choose a lower number!
+            <div className="font-serif text-lg">
+              * There are only{' '}
+              <span className="font-serif text-lg font-bold">
+                {currentShare.amount} Shares
+              </span>{' '}
+              available. Please choose a lower number!
             </div>
           </>
         )}
