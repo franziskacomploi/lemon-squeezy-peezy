@@ -81,14 +81,14 @@ const Dashboard = () => {
               />
             </div>
           )}
-          <div className="flex flex-row items-center gap-3">
-            <div className="smallLabel mt-2 w-20">Name:</div>
+          <div className="flex flex-row items-center gap-1 mt-2">
+            <div className="smallLabel w-20">Name:</div>
             <div className="smallDetails">
               {currentUser && currentUser.name}
             </div>
           </div>
-          <div className="flex flex-row items-center gap-3">
-            <div className="smallLabel mt-2 w-20">About:</div>
+          <div className="flex flex-row items-center gap-1 mt-2">
+            <div className="smallLabel w-20">About:</div>
             <div className="smallDetails">
               {currentUser && currentUser.description}
             </div>

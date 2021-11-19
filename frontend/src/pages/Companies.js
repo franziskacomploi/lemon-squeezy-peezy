@@ -39,11 +39,13 @@ const Companies = () => {
                 key={company._id}
                 className="flex flex-col m-4 w-48 text-center"
               >
-                <img
-                  src={company.logo}
-                  alt="company"
-                  className="w-28 h-28 rounded-full shadow object-cover mx-auto"
-                />
+                <div className="my-6 w-32 h-32 bg-alabaster rounded-full shadow mx-auto">
+                  <img
+                    src={company.logo}
+                    alt="company"
+                    className="w-28 h-28 rounded-full shadow object-cover mx-auto"
+                  />
+                </div>
                 <h2 className="bg-linen p-2 rounded-xl mt-4">{company.name}</h2>
                 <div className="flex flex-row mx-2 mt-2 gap-2 items-center">
                   {createRating(company).map(() => {
@@ -77,7 +79,9 @@ const Companies = () => {
             <h1 className="underline">{isOpenCompany.name}</h1>
             <div>{isOpenCompany.description}</div>
             <div className="flex flex-col items-center mb-10">
-              <div className="mb-2">Sustainability Rating:</div>
+              <div className="my-2 text-lg font-bold">
+                Sustainability Rating:
+              </div>
               <div className="flex flex-row mt-2 gap-2 items-center">
                 {createRating(isOpenCompany).map(() => {
                   return (
