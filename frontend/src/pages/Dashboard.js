@@ -82,9 +82,9 @@ const Dashboard = () => {
             </div>
           )}
           <div className="flex flex-row items-center gap-3">
-            <div className="smallLabel mt-2 w-20">Email:</div>
+            <div className="smallLabel mt-2 w-20">Name:</div>
             <div className="smallDetails">
-              {currentUser && currentUser.email}
+              {currentUser && currentUser.name}
             </div>
           </div>
           <div className="flex flex-row items-center gap-3">

@@ -20,17 +20,42 @@ const Companies = () => {
     });
   }, []);
 
+  const createRating = (company) => {
+    const rating = company.sustainability_rating;
+    const stars = [];
+    for (let i = 1; i <= rating; i++) {
+      stars.push(1);
+    }
+    return stars;
+  };
+
   return (
     <Layout>
-      <div className="flex flex-row justify-center gap-4 my-12">
+      <div className="flex flex-row justify-center gap-4 my-12 flex-wrap lg:flex-nowwrap">
         {companies &&
           companies.map((company) => {
             return (
               <div
                 key={company._id}
-                className="flex flex-col border rounded-xl shadow m-4 w-48 text-center"
+                className="flex flex-col m-4 w-48 text-center"
               >
-                <h2 className="bg-linen p-2 rounded-t-xl">{company.name}</h2>
+                <img
+                  src={company.logo}
+                  alt="company"
+                  className="w-28 h-28 rounded-full shadow object-cover mx-auto"
+                />
+                <h2 className="bg-linen p-2 rounded-xl mt-4">{company.name}</h2>
+                <div className="flex flex-row mx-2 mt-2 gap-2 items-center">
+                  {createRating(company).map(() => {
+                    return (
+                      <img
+                        src="https://res.cloudinary.com/dq66nu4hm/image/upload/v1637356036/lemon-squeezy/star_d9s8jn.png"
+                        alt="rating"
+                        className="w-6 h-6"
+                      />
+                    );
+                  })}
+                </div>
                 <div className="mt-6 mb-2">({company.founded_in})</div>
                 <button
                   type="button"

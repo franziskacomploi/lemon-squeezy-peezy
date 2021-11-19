@@ -11,7 +11,7 @@ const User = require('../models/User.model');
 // SIGN UP
 
 router.post('/signup', fileUploader.single('profileImg'), (req, res, next) => {
-  const { email, password, name, profileImg, description } = req.body;
+  const {email, password, name, profileImg, description} = req.body;
 
   if (!email || !password) {
     res.send({
@@ -28,7 +28,8 @@ router.post('/signup', fileUploader.single('profileImg'), (req, res, next) => {
         email,
         password: hashedPassword,
         name,
-        profileImg,
+        profileImg:
+          'https://res.cloudinary.com/dq66nu4hm/image/upload/v1637354315/lemon-squeezy/karsten-winegeart-oU6KZTXhuvk-unsplash_fr7qh7.jpg',
         description,
       });
     })
@@ -44,7 +45,7 @@ router.post('/signup', fileUploader.single('profileImg'), (req, res, next) => {
 router.post('/login', (req, res, next) => {
   console.log('SESSION =====> ', req.session);
 
-  const { email, password } = req.body;
+  const {email, password} = req.body;
 
   if (email === '' || password === '') {
     res.send({
@@ -53,7 +54,7 @@ router.post('/login', (req, res, next) => {
     return;
   }
 
-  User.findOne({ email }).then((user) => {
+  User.findOne({email}).then((user) => {
     if (!user) {
       res.send({
         error: "We can't find this email.",
@@ -62,7 +63,7 @@ router.post('/login', (req, res, next) => {
       req.session.currentUser = user;
       res.send(user);
     } else {
-      res.send({ error: 'Incorrect password.' });
+      res.send({error: 'Incorrect password.'});
     }
   });
 });
