@@ -27,3 +27,15 @@ p {
 .smallButton {
   @apply px-4 py-2 bg-alabaster font-bold text-lg tracking-wide rounded-full shadow;
 }
+
+.smallLabel {
+  @apply px-4 py-1 bg-alabaster font-bold text-sm tracking-wide rounded-full shadow;
+}
+
+.smallDetails {
+  @apply px-4 py-1 font-bold text-sm tracking-wide;
+}
+
+.modalHeading {
+  @apply px-4 py-1 font-bold text-base;
+}

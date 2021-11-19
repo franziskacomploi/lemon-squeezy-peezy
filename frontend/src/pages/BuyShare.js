@@ -1,14 +1,14 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import AuthContext from '../context/AuthContext';
 import Layout from '../components/layout/Layout';
 import axios from 'axios';
-import { Link, useHistory } from 'react-router-dom';
+import {Link, useHistory} from 'react-router-dom';
 import LemonDivider from '../components/main/LemonDivider';
 import ExitIcon from '../assets/exit-icon.png';
 const backendURL = process.env.REACT_APP_BACKENDURL;
 
 const BuyShare = () => {
-  const { buy, currentUser } = useContext(AuthContext);
+  const {buy, currentUser} = useContext(AuthContext);
   const [shares, setShares] = useState();
   const [currentShare, setCurrentShare] = useState();
   const [currentStep, setCurrentStep] = useState(1);
@@ -40,7 +40,7 @@ const BuyShare = () => {
       .post(`${backendURL}/api/buyshare`, {
         name: currentShare.name,
         company: currentShare.company,
-        price: currentShare.price * amountOfShares,
+        value: currentShare.price * amountOfShares,
         user: currentUser.email,
         boughtAmount: amountOfShares,
         restAmount: currentShare.amount - amountOfShares,
@@ -108,22 +108,30 @@ const BuyShare = () => {
             </button>
             <h1 className="text-center">You are buying {currentShare.name}</h1>
             <LemonDivider />
-            <form onSubmit={handleBuySubmit}>
-              <label>How many share would you like to buy?</label>
-              <input
-                type="number"
-                onChange={(e) => {
-                  if (e.target.value > currentShare.amount) {
-                    setError(true);
-                  } else if (e.target.value < currentShare.amount) {
-                    setError(false);
-                    setAmountOfShares(e.target.value);
-                  }
-                }}
-              />
-              <button type="submit" className="smallButton my-4">
-                Buy Now
-              </button>
+            <form
+              onSubmit={handleBuySubmit}
+              className="flex flex-col items-center gap-2"
+            >
+              <label className="authLabel">
+                How many share would you like to buy?
+              </label>
+              <div className="flex flex-row items-center gap-2">
+                <input
+                  className="authInput"
+                  type="number"
+                  onChange={(e) => {
+                    if (e.target.value > currentShare.amount) {
+                      setError(true);
+                    } else if (e.target.value < currentShare.amount) {
+                      setError(false);
+                      setAmountOfShares(e.target.value);
+                    }
+                  }}
+                />
+                <button type="submit" className="smallButton my-4">
+                  Buy Now
+                </button>
+              </div>
             </form>
           </>
         )}

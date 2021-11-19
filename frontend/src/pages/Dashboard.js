@@ -1,13 +1,13 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import Layout from '../components/layout/Layout';
 import AuthContext from '../context/AuthContext';
 import axios from 'axios';
-import { Modal } from '../components/common/Modal';
+import {Modal} from '../components/common/Modal';
 import LemonDivider from '../components/main/LemonDivider';
 const backendURL = process.env.REACT_APP_BACKENDURL;
 
 const Dashboard = () => {
-  const { currentUser } = useContext(AuthContext);
+  const {currentUser} = useContext(AuthContext);
   const [shares, setShares] = useState();
   const [showModal, setShowModal] = useState(false);
   const [currentShare, setCurrentShare] = useState();
@@ -36,19 +36,24 @@ const Dashboard = () => {
   const handleSellSubmit = (e) => {
     e.preventDefault();
 
-    const restAmount = currentShare.amount - amountOfShares;
+    const restAmount = currentShare.boughtAmount - amountOfShares;
+    console.log('amountOfShares', amountOfShares);
+    console.log('value', currentShare.originalShare.price * restAmount);
+    console.log(
+      'soldAmount',
+      currentShare.originalShare.amount + amountOfShares
+    );
     axios
       .post(`${backendURL}/api/sellshare/${currentShare._id}`, {
         name: currentShare.name,
         company: currentShare.company,
-        price: currentShare.originalShare.price * restAmount,
+        value: currentShare.originalShare.price * restAmount,
         user: currentUser.email,
         restAmount: restAmount,
         soldAmount: currentShare.originalShare.amount + amountOfShares,
       })
       .then(() => {
         setShowModal(false);
-        console.log('success');
       })
       .catch((error) => {
         console.log(error.code, error.message);
@@ -60,20 +65,45 @@ const Dashboard = () => {
       <div className="text-center">
         <h2 className="my-6">Lemon Dashboard 🍋</h2>
         <LemonDivider />
-        <h3>Personal Details</h3>
-        <div>Email: {currentUser && currentUser.email}</div>
-        <div>About: {currentUser && currentUser.description}</div>
+        <div className="flex flex-col items-center justify-center">
+          <h3>Personal Details</h3>
+          <div className="flex flex-row items-center gap-3">
+            <div className="smallLabel mt-2 w-20">Email:</div>
+            <div className="smallDetails">
+              {currentUser && currentUser.email}
+            </div>
+          </div>
+          <div className="flex flex-row items-center gap-3">
+            <div className="smallLabel mt-2 w-20">About:</div>
+            <div className="smallDetails">
+              {currentUser && currentUser.description}
+            </div>
+          </div>
+        </div>
         {shares && shares.length > 0 && (
           <div className="my-8">
             <LemonDivider />
             <h3 className="mb-4">Your shares</h3>
-            <div className="flex flex-row justify-center items-center">
+            <div className="flex flex-row justify-center items-center gap-3">
               {shares.map((share) => {
                 return (
-                  <div key={share._id}>
-                    <div>Name: {share.name}</div>
-                    <div>Value: {share.price}</div>
-                    <div>Company: {share.company.name}</div>
+                  <div key={share._id} className="shadow p-2 rounded-lg">
+                    <div className="flex flex-row items-center gap-3">
+                      <div className="smallLabel mt-2">Name:</div>
+                      <div className="smallDetails">{share.name}</div>
+                    </div>
+                    <div className="flex flex-row items-center gap-3">
+                      <div className="smallLabel mt-2">Value:</div>
+                      <div className="smallDetails">{share.value}</div>
+                    </div>
+                    <div className="flex flex-row items-center gap-3">
+                      <div className="smallLabel mt-2">Amount:</div>
+                      <div className="smallDetails">{share.boughtAmount}</div>
+                    </div>
+                    <div className="flex flex-row items-center gap-3">
+                      <div className="smallLabel mt-2">Company:</div>
+                      <div className="smallDetails"> {share.company.name}</div>
+                    </div>
                     <button
                       type="button"
                       className="smallButton mt-4"
@@ -90,33 +120,40 @@ const Dashboard = () => {
           </div>
         )}
         <Modal className={showModal} handleExitClick={closeModal}>
-          <form onSubmit={handleSellSubmit}>
-            <label>
+          <form
+            onSubmit={handleSellSubmit}
+            className="flex flex-col items-center justify-center p-2"
+          >
+            <label className="modalHeading mt-6">
               How many of the share{' '}
               <span>"{currentShare && currentShare.name}"</span> do you want to
               sell?
             </label>
-            <input
-              type="number"
-              onChange={(e) => {
-                if (
-                  e.target.value > currentShare.amount ||
-                  e.target.value < 0
-                ) {
-                  setError(true);
-                } else if (e.target.value < currentShare.amount) {
-                  setError(false);
-                  setAmountOfShares(e.target.value);
-                }
-              }}
-            />
-            <button type="submit" className="smallButton mt-4">
-              Sell shares
-            </button>
+            <div className="flex flex-row gap-3 items-center mt-4">
+              <input
+                className="authInput"
+                type="number"
+                onChange={(e) => {
+                  if (
+                    e.target.value > currentShare.boughtAmount ||
+                    e.target.value < 0
+                  ) {
+                    setError(true);
+                    setAmountOfShares(e.target.value);
+                  } else if (e.target.value < currentShare.boughtAmount) {
+                    setError(false);
+                    setAmountOfShares(e.target.value);
+                  }
+                }}
+              />
+              <button type="submit" className="smallButton">
+                Sell shares
+              </button>
+            </div>
           </form>
           {error && (
-            <div>
-              You can't sell this amount of shares. Please specify another
+            <div className="text-sm mx-auto px-8">
+              *You can't sell this amount of shares. Please specify another
               number.
             </div>
           )}

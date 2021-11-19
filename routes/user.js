@@ -6,15 +6,16 @@ const Share = require('../models/Share.model');
 const Company = require('../models/Company.model');
 
 router.post('/buyshare', (req, res, next) => {
-  const {name, company, price, user, boughtAmount, restAmount, originalShare} =
+  const {name, company, value, user, boughtAmount, restAmount, originalShare} =
     req.body;
+
   BoughtShare.create({
     name,
     company,
-    price,
-    user,
     originalShare,
-    amount: boughtAmount,
+    value,
+    user,
+    boughtAmount,
   })
     .then(() => {
       return Share.findOneAndUpdate({name}, {amount: restAmount}, {new: true});
@@ -26,8 +27,8 @@ router.post('/buyshare', (req, res, next) => {
 
 router.post('/sellshare/:id', (req, res, next) => {
   const id = req.params.id;
-  const {name, company, price, user, restAmount, soldAmount} = req.body;
-  BoughtShare.findByIdAndUpdate(id, {amount: restAmount, price: price})
+  const {name, company, value, user, restAmount, soldAmount} = req.body;
+  BoughtShare.findByIdAndUpdate(id, {amount: restAmount, value: value})
     .then(() => {
       return Share.findOneAndUpdate({name}, {amount: soldAmount});
     })

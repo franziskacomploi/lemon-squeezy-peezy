@@ -5,7 +5,7 @@ const boughtshareSchema = new Schema({
   name: String,
   company: {type: Schema.Types.ObjectId, ref: 'Company'},
   originalShare: {type: Schema.Types.ObjectId, ref: 'Share'},
-  price: Number,
+  value: Number,
   user: String,
   boughtAmount: Number,
 });
