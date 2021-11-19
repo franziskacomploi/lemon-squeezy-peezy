@@ -1,14 +1,14 @@
-import React, {useContext, useEffect, useState} from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import AuthContext from '../context/AuthContext';
 import Layout from '../components/layout/Layout';
 import axios from 'axios';
-import {Link, useHistory} from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import LemonDivider from '../components/main/LemonDivider';
 import ExitIcon from '../assets/exit-icon.png';
 const backendURL = process.env.REACT_APP_BACKENDURL;
 
 const BuyShare = () => {
-  const {buy, currentUser} = useContext(AuthContext);
+  const { buy, currentUser } = useContext(AuthContext);
   const [shares, setShares] = useState();
   const [currentShare, setCurrentShare] = useState();
   const [currentStep, setCurrentStep] = useState(1);
@@ -41,7 +41,7 @@ const BuyShare = () => {
         name: currentShare.name,
         company: currentShare.company,
         price: currentShare.price * amountOfShares,
-        user: currentUser.data.email,
+        user: currentUser.email,
         boughtAmount: amountOfShares,
         restAmount: currentShare.amount - amountOfShares,
         originalShare: currentShare._id,

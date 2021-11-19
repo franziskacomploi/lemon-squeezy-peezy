@@ -1,5 +1,5 @@
-import React, {useContext, useState} from 'react';
-import {useHistory} from 'react-router-dom';
+import React, { useContext, useState } from 'react';
+import { useHistory } from 'react-router-dom';
 import AuthContext from '../../context/AuthContext';
 import axios from 'axios';
 const backendURL = process.env.REACT_APP_BACKENDURL;
@@ -9,7 +9,7 @@ const Login = () => {
   const [isPassword, setIsPassword] = useState('');
   const [error, setError] = useState('');
   const history = useHistory();
-  const {setCurrentUser} = useContext(AuthContext);
+  const { setCurrentUser } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -27,8 +27,8 @@ const Login = () => {
         email: isEmail,
         password: isPassword,
       })
-      .then((user) => {
-        setCurrentUser(user);
+      .then((res) => {
+        setCurrentUser(res.data);
         history.push('/dashboard');
       })
       .catch((error) => {

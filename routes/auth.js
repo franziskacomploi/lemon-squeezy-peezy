@@ -11,7 +11,7 @@ const User = require('../models/User.model');
 // SIGN UP
 
 router.post('/signup', fileUploader.single('profileImg'), (req, res, next) => {
-  const {email, password, name, profileImg, description} = req.body;
+  const { email, password, name, profileImg, description } = req.body;
 
   if (!email || !password) {
     res.send({
@@ -44,7 +44,7 @@ router.post('/signup', fileUploader.single('profileImg'), (req, res, next) => {
 router.post('/login', (req, res, next) => {
   console.log('SESSION =====> ', req.session);
 
-  const {email, password} = req.body;
+  const { email, password } = req.body;
 
   if (email === '' || password === '') {
     res.send({
@@ -53,7 +53,7 @@ router.post('/login', (req, res, next) => {
     return;
   }
 
-  User.findOne({email}).then((user) => {
+  User.findOne({ email }).then((user) => {
     if (!user) {
       res.send({
         error: "We can't find this email.",
@@ -62,7 +62,7 @@ router.post('/login', (req, res, next) => {
       req.session.currentUser = user;
       res.send(user);
     } else {
-      res.send({error: 'Incorrect password.'});
+      res.send({ error: 'Incorrect password.' });
     }
   });
 });
@@ -72,7 +72,6 @@ router.post('/login', (req, res, next) => {
 router.post('/logout', (req, res) => {
   req.session.destroy();
   res.send();
-  next();
 });
 
 module.exports = router;

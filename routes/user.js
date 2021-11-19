@@ -21,7 +21,6 @@ router.post('/buyshare', (req, res, next) => {
     })
     .then(() => {
       res.send();
-      next();
     });
 });
 
@@ -34,7 +33,6 @@ router.post('/sellshare/:id', (req, res, next) => {
     })
     .then(() => {
       res.send();
-      next();
     });
 });
 
@@ -45,7 +43,6 @@ router.get('/dashboard/:email', (req, res, next) => {
     .populate({path: 'originalShare', model: Share})
     .then((shares) => {
       res.send({shares: shares});
-      next();
     });
 });
 
