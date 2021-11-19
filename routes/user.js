@@ -28,7 +28,7 @@ router.post('/buyshare', (req, res, next) => {
 router.post('/sellshare/:id', (req, res, next) => {
   const id = req.params.id;
   const {name, company, value, user, restAmount, soldAmount} = req.body;
-  BoughtShare.findByIdAndUpdate(id, {amount: restAmount, value: value})
+  BoughtShare.findByIdAndUpdate(id, {boughtAmount: restAmount, value: value})
     .then(() => {
       return Share.findOneAndUpdate({name}, {amount: soldAmount});
     })

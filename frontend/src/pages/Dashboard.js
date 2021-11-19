@@ -13,16 +13,20 @@ const Dashboard = () => {
   const [currentShare, setCurrentShare] = useState();
   const [error, setError] = useState();
   const [amountOfShares, setAmountOfShares] = useState();
+  const [refreshKey, setRefreshKey] = useState(0);
 
   useEffect(() => {
     if (currentUser) {
-      axios
-        .get(`${backendURL}/api/dashboard/${currentUser.email}`)
-        .then((data) => {
-          setShares(data.data.shares);
-        });
+      async function fetchData() {
+        axios
+          .get(`${backendURL}/api/dashboard/${currentUser.email}`)
+          .then((data) => {
+            setShares(data.data.shares);
+          });
+      }
+      fetchData();
     }
-  }, [currentUser]);
+  }, [currentUser, refreshKey]);
 
   const handleSell = (share) => {
     setCurrentShare(share);
@@ -37,12 +41,10 @@ const Dashboard = () => {
     e.preventDefault();
 
     const restAmount = currentShare.boughtAmount - amountOfShares;
-    console.log('amountOfShares', amountOfShares);
-    console.log('value', currentShare.originalShare.price * restAmount);
-    console.log(
-      'soldAmount',
-      currentShare.originalShare.amount + amountOfShares
-    );
+    const soldAmount = currentShare.originalShare.amount + amountOfShares;
+
+    console.log('soldAmount', soldAmount);
+
     axios
       .post(`${backendURL}/api/sellshare/${currentShare._id}`, {
         name: currentShare.name,
@@ -50,10 +52,11 @@ const Dashboard = () => {
         value: currentShare.originalShare.price * restAmount,
         user: currentUser.email,
         restAmount: restAmount,
-        soldAmount: currentShare.originalShare.amount + amountOfShares,
+        soldAmount: soldAmount,
       })
       .then(() => {
         setShowModal(false);
+        setRefreshKey(refreshKey + 1);
       })
       .catch((error) => {
         console.log(error.code, error.message);
@@ -67,6 +70,15 @@ const Dashboard = () => {
         <LemonDivider />
         <div className="flex flex-col items-center justify-center">
           <h3>Personal Details</h3>
+          {currentUser.profileImg && (
+            <div className="my-6 w-28 h-28 bg-alabaster rounded-full shadow">
+              <img
+                src={currentUser.profileImg}
+                alt="profile"
+                className="rounded-full w-24 h-24 object-cover mx-auto shadow"
+              />
+            </div>
+          )}
           <div className="flex flex-row items-center gap-3">
             <div className="smallLabel mt-2 w-20">Email:</div>
             <div className="smallDetails">
