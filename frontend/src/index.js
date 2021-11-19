@@ -15,6 +15,3 @@ axios
       document.getElementById('root')
     );
   })
-  .catch((err) => {
-    alert('Backend not running or /checkuser route not defined!');
-  });
