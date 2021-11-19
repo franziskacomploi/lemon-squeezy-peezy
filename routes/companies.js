@@ -23,7 +23,6 @@ router.get('/shares/:id', (req, res, next) => {
     .populate({path: 'company', model: Company})
     .then((sharesFound) => {
       res.send({shares: sharesFound});
-      next();
     });
 });
 

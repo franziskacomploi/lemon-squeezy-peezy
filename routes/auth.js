@@ -58,11 +58,9 @@ router.post('/login', (req, res, next) => {
       res.send({
         error: "We can't find this email.",
       });
-      next();
     } else if (bcryptjs.compareSync(password, user.password)) {
       req.session.currentUser = user;
       res.send(user);
-      next();
     } else {
       res.send({error: 'Incorrect password.'});
     }
