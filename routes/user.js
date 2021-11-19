@@ -9,14 +9,22 @@ router.post('/buyshare', (req, res, next) => {
   const {name, company, value, user, boughtAmount, restAmount, originalShare} =
     req.body;
 
-  BoughtShare.create({
-    name,
-    company,
-    originalShare,
-    value,
-    user,
-    boughtAmount,
-  })
+  BoughtShare.findOneAndUpdate(
+    {user: user, name: name, company: company},
+    {boughtAmount: boughtAmount, value: value}
+  )
+    .then((result) => {
+      if (!result) {
+        return BoughtShare.create({
+          name,
+          company,
+          originalShare,
+          value,
+          user,
+          boughtAmount,
+        });
+      }
+    })
     .then(() => {
       return Share.findOneAndUpdate({name}, {amount: restAmount}, {new: true});
     })

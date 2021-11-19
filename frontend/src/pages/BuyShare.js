@@ -12,7 +12,8 @@ const BuyShare = () => {
   const [shares, setShares] = useState();
   const [currentShare, setCurrentShare] = useState();
   const [currentStep, setCurrentStep] = useState(1);
-  const [amountOfShares, setAmountOfShares] = useState();
+  const [amountOfShares, setAmountOfShares] = useState(0);
+  const [existingShares, setExistingShares] = useState();
   const [error, setError] = useState();
   const history = useHistory();
 
@@ -22,7 +23,13 @@ const BuyShare = () => {
         setShares(data.data.shares);
       });
     }
-  }, [buy]);
+
+    axios
+      .get(`${backendURL}/api/dashboard/${currentUser.email}`)
+      .then((share) => {
+        setExistingShares(share.data.shares);
+      });
+  }, [buy, currentUser.email]);
 
   const handleBuyStart = (share) => {
     setCurrentShare(share);
@@ -47,7 +54,6 @@ const BuyShare = () => {
         originalShare: currentShare._id,
       })
       .then(() => {
-        console.log('success');
         history.push('/success');
       })
       .catch((error) => {
@@ -124,7 +130,22 @@ const BuyShare = () => {
                       setError(true);
                     } else if (e.target.value < currentShare.amount) {
                       setError(false);
-                      setAmountOfShares(e.target.value);
+                      if (existingShares.length > 0) {
+                        const share = existingShares.filter(
+                          (share) =>
+                            share.name === currentShare.name &&
+                            share.company.name === currentShare.company.name
+                        );
+                        if (share.length !== 0) {
+                          const amount = amountOfShares;
+                          setAmountOfShares(share[0].boughtAmount + amount);
+                          console.log(amountOfShares);
+                        } else {
+                          setAmountOfShares(parseInt(e.target.value));
+                        }
+                      } else {
+                        setAmountOfShares(parseInt(e.target.value));
+                      }
                     }
                   }}
                 />
