@@ -64,7 +64,7 @@ const Companies = () => {
                     setIsOpenCompany(company);
                   }}
                 >
-                  See details
+                  Choose
                 </button>
               </div>
             );
@@ -76,8 +76,19 @@ const Companies = () => {
           <div className="text-center mx-2 my-12">
             <h1 className="underline">{isOpenCompany.name}</h1>
             <div>{isOpenCompany.description}</div>
-            <div className="mb-10">
-              Sustainability Rating: {isOpenCompany.sustainability_rating}
+            <div className="flex flex-col items-center mb-10">
+              <div className="mb-2">Sustainability Rating:</div>
+              <div className="flex flex-row mt-2 gap-2 items-center">
+                {createRating(isOpenCompany).map(() => {
+                  return (
+                    <img
+                      src="https://res.cloudinary.com/dq66nu4hm/image/upload/v1637356036/lemon-squeezy/star_d9s8jn.png"
+                      alt="rating"
+                      className="w-6 h-6"
+                    />
+                  );
+                })}
+              </div>
             </div>
             <button
               onClick={() => {
