@@ -2,8 +2,9 @@ import React, {useContext, useEffect, useState} from 'react';
 import Layout from '../components/layout/Layout';
 import AuthContext from '../context/AuthContext';
 import axios from 'axios';
-import {Modal} from '../components/common/Modal';
 import LemonDivider from '../components/main/LemonDivider';
+import {SellModal} from '../components/dashboard/SellModal';
+import {ShareView} from '../components/dashboard/ShareView';
 const backendURL = process.env.REACT_APP_BACKENDURL;
 
 const Dashboard = () => {
@@ -11,7 +12,6 @@ const Dashboard = () => {
   const [shares, setShares] = useState();
   const [showModal, setShowModal] = useState(false);
   const [currentShare, setCurrentShare] = useState();
-  const [error, setError] = useState();
   const [amountOfShares, setAmountOfShares] = useState();
   const [refreshKey, setRefreshKey] = useState(0);
 
@@ -123,78 +123,18 @@ const Dashboard = () => {
             <h3 className="mb-4">Your shares</h3>
             <div className="flex flex-row justify-center items-center gap-3">
               {shares.map((share) => {
-                return (
-                  <div key={share._id} className="shadow p-2 rounded-lg">
-                    <div className="labelContainer">
-                      <div className="smallLabel">Name:</div>
-                      <div className="smallDetails">{share.name}</div>
-                    </div>
-                    <div className="labelContainer">
-                      <div className="smallLabel">Value:</div>
-                      <div className="smallDetails">{share.value}€</div>
-                    </div>
-                    <div className="labelContainer">
-                      <div className="smallLabel">Amount:</div>
-                      <div className="smallDetails">{share.boughtAmount}</div>
-                    </div>
-                    <div className="labelContainer">
-                      <div className="smallLabel">Company:</div>
-                      <div className="smallDetails"> {share.company.name}</div>
-                    </div>
-                    <button
-                      type="button"
-                      className="smallButton mt-4"
-                      onClick={() => {
-                        handleSell(share);
-                      }}
-                    >
-                      Sell
-                    </button>
-                  </div>
-                );
+                return <ShareView share={share} handleSell={handleSell} />;
               })}
             </div>
           </div>
         )}
-        <Modal className={showModal} handleExitClick={closeModal}>
-          <form
-            onSubmit={handleSellSubmit}
-            className="flex flex-col items-center justify-center p-2"
-          >
-            <label className="modalHeading mt-6">
-              How many of the share{' '}
-              <span>"{currentShare && currentShare.name}"</span> do you want to
-              sell?
-            </label>
-            <div className="flex flex-row gap-3 items-center mt-4">
-              <input
-                className="authInput"
-                type="number"
-                onChange={(e) => {
-                  if (
-                    e.target.value > currentShare.boughtAmount ||
-                    e.target.value < 0
-                  ) {
-                    setError(true);
-                    setAmountOfShares(e.target.value);
-                  } else if (e.target.value < currentShare.boughtAmount) {
-                    setError(false);
-                    setAmountOfShares(e.target.value);
-                  }
-                }}
-              />
-              <button type="submit" className="smallButton">
-                Sell shares
-              </button>
-            </div>
-          </form>
-          {error && (
-            <div className="text-sm mx-auto px-8">
-              *You can't sell this amount of shares. Please specify another
-              number.
-            </div>
-          )}
-        </Modal>
+        <SellModal
+          handleSellSubmit={handleSellSubmit}
+          showModal={showModal}
+          closeModal={closeModal}
+          currentShare={currentShare}
+          setAmountOfShares={setAmountOfShares}
+        />
       </div>
     </Layout>
   );
